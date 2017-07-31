@@ -23,6 +23,8 @@ class LogisticRegression(object):
             self.w_[0] += self.__learning_rate * errors.sum()
 
             self.cost_.append(self.__logit_cost(y, self.__activation(y_)))
+            print("cost is ")
+            print(self.__logit_cost(y, self.__activation(y_)))
 
     def __logit_cost(self, y, y_val):
         logit = -y.dot(np.log(y_val)) - ((1 - y).dot(np.log(1 - y_val)))
@@ -63,6 +65,10 @@ train_x, train_y, test_x, test_y = np.asarray(train_x), np.asarray(train_y), np.
 
 train_x, means, stds = standardize(train_x)
 test_x = standardize(test_x, means, stds)
+print (train_x)
+print(train_x.shape[1])
+print(train_y)
+print(train_y.shape)
 
 lr = LogisticRegression(learning_rate=0.1, epochs=50)
 lr.fit(train_x, train_y)

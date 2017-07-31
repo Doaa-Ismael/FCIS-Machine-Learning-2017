@@ -20,13 +20,37 @@ y = tf.placeholder("float", [None, n_classes])
 
 # 1- Create the network weights and initialize them by random values
 # 2- Create the network biases and initialize them by random values
+
+hidden_1_weights  = tf.Variable(tf.random_normal([n_input,n_hidden_1]))
+hidden_1_bias = tf.Variable(tf.random_normal([n_hidden_1]))
+
+hidden_2_weights = tf.Variable(tf.random_normal([n_hidden_1,n_hidden_2]))
+hidden_2_bias = tf.Variable(tf.random_normal([n_hidden_2]))
+
+output_layer_weights = tf.Variable(tf.random_normal([n_hidden_2,n_classes]))
+output_layer_bias =  tf.Variable(tf.random_normal([n_classes]))
+
 # 3- Apply feedforward process between the layers and use sigmoid activation in both layers
+
+hidden_1_mulitiplication = tf.matmul(x,hidden_1_weights) + hidden_1_bias
+hidden_1_mulitiplication = tf.nn.sigmoid(hidden_1_mulitiplication)
+
+
+hidden_2_mulitiplication = tf.matmul(hidden_1_mulitiplication,hidden_2_weights) + hidden_2_bias
+hidden_2_mulitiplication = tf.nn.sigmoid(hidden_2_mulitiplication)
+
+
+hidden_to_output = tf.matmul(hidden_2_mulitiplication,output_layer_weights) + output_layer_bias
+
+
 # 4- Name the output layer values by hidden_to_output
+
 # 4- Uncomment the cost line
 
 #define the cost function
-#cost = tf.nn.softmax_cross_entropy_with_logits(logits=hidden_to_output, labels=y)
-#cost = tf.reduce_mean(cost)
+
+cost = tf.nn.softmax_cross_entropy_with_logits(logits=hidden_to_output, labels=y)
+cost = tf.reduce_mean(cost)
 optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.1).minimize(cost)
 
 # Initializing the variables
