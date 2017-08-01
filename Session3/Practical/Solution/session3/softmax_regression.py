@@ -1,5 +1,5 @@
-from data_reader.reader import CsvReader
-from util import *
+from session3.data_reader.reader import CsvReader
+from session3.util import *
 import numpy as np
 import matplotlib.pyplot as plt
 import copy as cp
@@ -91,5 +91,6 @@ plt.show()
 print("predict")
 print(lr.predict(test_x))
 predicted_test = np.asarray(lr.predict(test_x))
+
 
 print("Test Accuracy: " + str(((sum([np.array_equal(predicted_test[i], test_y[i]) for i in range(0, len(predicted_test))]) / len(predicted_test)) * 100.0)) + "%")

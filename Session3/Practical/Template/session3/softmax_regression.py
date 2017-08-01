@@ -22,7 +22,7 @@ class SoftmaxRegression(object):
             # 4- Update the weights and bias using the gradient and learning rate
             # 5- Uncomment the cost collecting line
 
-            #self.cost_.append(self.__cost(self._cross_entropy(output=activated_y, y_target=y)))
+            self.cost_.append(self.__cost(self._cross_entropy(output=activated_y, y_target=y)))
 
     def _cross_entropy(self, output, y_target):
         return -np.sum(np.log(output) * (y_target), axis=1)
